@@ -3,16 +3,21 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomePage } from './pages/Home.page';
 import { CheckoutPage } from './pages/Checkout.page';
-import Header from './components/header.component';
+import { useState } from 'react';
 
 
 export default function App() {
   const Drawer = createDrawerNavigator();
+  const [ refreshFlag, refresh ] = useState(false);
   return (
     <NavigationContainer>
       <Drawer.Navigator screenOptions={{ headerShown: false}}>
-        <Drawer.Screen name='Home' component={HomePage} />
-        <Drawer.Screen name='Checkout' component={CheckoutPage} />
+        <Drawer.Screen name='Home' >
+        { props => <HomePage {...props} refresh={refresh} refreshFlag={refreshFlag} /> }
+        </Drawer.Screen>
+        <Drawer.Screen name='Checkout'>
+          { props => <CheckoutPage {...props} refresh={refresh} refreshFlag={refreshFlag} /> }
+        </Drawer.Screen>
       </Drawer.Navigator>
     </NavigationContainer>
   );

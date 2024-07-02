@@ -4,9 +4,9 @@ import { ShoppingBagIcon } from 'react-native-heroicons/solid';
 import { addProduct, hasProduct, removeProduct } from "../storage"
 import { useEffect, useState } from "react"
 
-export default function Product({ id, name, description, price, image, isListView }){
+export default function Product({ id, name, description, price, image, isListView, refresh, refreshFlag }){
     const [ isFavourite, setIsFavourite ] = useState(false);
-    const [ refreshFlag, refresh ] = useState(false);
+    
 
     async function getIsFavourite(){
         const storageHasProduct = await hasProduct(id) 

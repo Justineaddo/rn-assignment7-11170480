@@ -4,7 +4,7 @@ import { FunnelIcon, ListBulletIcon } from "react-native-heroicons/outline";
 import { useState } from "react";
 import Product from "../components/product.component";
 
-export function HomePage({ navigation }){
+export function HomePage({ navigation,  refresh, refreshFlag }){
 
     const [ isListView, setIsListView ] = useState(false);
 
@@ -22,7 +22,7 @@ export function HomePage({ navigation }){
                 <ScrollView style={{ display: 'flex' }}>
                     <View style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', flex: 2, columnGap: 10}}>
                         {
-                            products.map((prod, idx) => <Product {...prod} isListView={isListView} key={idx} />)
+                            products.map((prod, idx) => <Product {...prod} isListView={isListView} refresh={refresh} refreshFlag={refreshFlag} key={idx} />)
                         }
                     </View>
                 </ScrollView>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const products = [
+export const products = [
     {
         id: '0001',
         name: 'Office Wear',

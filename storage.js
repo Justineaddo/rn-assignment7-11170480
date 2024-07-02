@@ -26,7 +26,6 @@ export async function setProducts(products){
 
 export async function addProduct(productId){
     const existingProducts =  await getProducts();
-    console.log("Raw products:", existingProducts);
     if(existingProducts.includes(productId)){
         return;
     }
@@ -39,13 +38,10 @@ export async function removeProduct(item){
     const existingProducts = await getProducts();
 
     const updatedProducts = existingProducts.filter( id =>  id != item );
-    console.log("Updated Products:", updatedProducts);
     await setProducts(updatedProducts);
 }
 
 export async function hasProduct(productId){
     const existingProducts = await getProducts();
-    console.log("Raw products:", existingProducts);
-    console.log("Has", productId,":", existingProducts.includes(productId))
     return existingProducts.includes(productId);
 }
