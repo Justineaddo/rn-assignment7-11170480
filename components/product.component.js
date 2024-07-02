@@ -1,11 +1,23 @@
 import { View, Image, Text } from "react-native"
 import { PlusCircleIcon } from "react-native-heroicons/outline"
+import { ShoppingBagIcon } from 'react-native-heroicons/solid';
+import { addProduct, hasProduct, removeProduct } from "../storage"
+import { useEffect, useState } from "react"
 
+export default function Product({ id, name, description, price, image, isListView }){
+    const [ isFavourite, setIsFavourite ] = useState(false);
+    const [ refreshFlag, refresh ] = useState(false);
 
-export default function Product({ name, description, price, image, isListView }){
-    
-    return (
-        
+    async function getIsFavourite(){
+        const storageHasProduct = await hasProduct(id) 
+        setIsFavourite(storageHasProduct);
+    }
+
+    useEffect(() => {
+        getIsFavourite()
+    }, [refreshFlag])
+
+    return ( 
         <View style={{ width: isListView ? '100%' : 155, height: isListView ? 150 : undefined, marginBottom: 20 }}>
             {   
                 !isListView &&
@@ -15,11 +27,22 @@ export default function Product({ name, description, price, image, isListView })
                             source={image} 
                             style={{ width: '100%', height: undefined, aspectRatio: 0.5}}
                         />
-                        <PlusCircleIcon 
-                            style={{ position: 'absolute', bottom: 10, right: 10 }} 
-                            color={'black'} 
-                            size={20} 
+                        {
+                            isFavourite ?
+                            <ShoppingBagIcon
+                                style={{ position: 'absolute', bottom: 10, right: 10 }} 
+                                color={'red'} 
+                                size={20} 
+                                onPress={async () => { await removeProduct(id), refresh(prev => !prev) }}
                             />
+                            :
+                            <PlusCircleIcon 
+                                style={{ position: 'absolute', bottom: 10, right: 10 }} 
+                                color={'black'} 
+                                size={20} 
+                                onPress={async () => { await addProduct(id), refresh(prev => !prev) }}
+                            />
+                        }
                     </View>
                     <View style={{ display: 'flex', gap: 5}}>
                         <Text style={{ fontSize: 20 }}>{name}</Text>
@@ -44,10 +67,20 @@ export default function Product({ name, description, price, image, isListView })
                         <Text style={{ fontSize: 20 }}>{name}</Text>
                         <Text style={{ color: 'grey' }}>{description}</Text>
                         <Text style={{ color: 'orange', fontSize: 20 }}>${price}</Text>
-                        <PlusCircleIcon 
-                            color={'black'} 
-                            size={20} 
+                        {
+                            isFavourite ?
+                            <ShoppingBagIcon
+                                color={'red'} 
+                                size={20} 
+                                onPress={async () => { await removeProduct(id), refresh(prev => !prev) }}
                             />
+                            :
+                            <PlusCircleIcon 
+                                color={'black'} 
+                                size={20} 
+                                onPress={async () => { await addProduct(id), refresh(prev => !prev) }}
+                                />
+                        }
                     </View>
                 </View>
             }

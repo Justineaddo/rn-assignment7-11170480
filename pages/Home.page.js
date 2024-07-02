@@ -8,7 +8,6 @@ export function HomePage({ navigation }){
 
     const [ isListView, setIsListView ] = useState(false);
 
-
     return (
         <>
             <Header navigation={navigation} />
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
         padding: 20,
         paddingBottom: 50,
         backgroundColor: 'white',
+        marginBottom: 100,
     }
 })
 
