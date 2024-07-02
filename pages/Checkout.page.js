@@ -1,28 +1,39 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import Header from "../components/header.component";
 import { useEffect, useState } from "react";
-import { getProducts } from "../storage";
+import { getProducts, removeProduct } from "../storage";
 import { products } from "./Home.page";
 import { XMarkIcon } from "react-native-heroicons/solid";
 
+import { ArefRuqaa_400Regular, useFonts } from '@expo-google-fonts/aref-ruqaa'
+
+
 export function CheckoutPage({ navigation, refresh, refreshFlag } ){
     const [ favourites, setFavourites] = useState([]);
-
+    
+    
+    
     async function getFavourites(){
         const faveIds = await getProducts();
         const faves = products.filter(p => faveIds.includes(p.id) )
         setFavourites(faves)
     }
-
+    
     useEffect(() => {
         getFavourites();
     }, [refreshFlag])
 
+    let [ fontsLoaded ] =  useFonts({ ArefRuqaa_400Regular});
+
+    if(!fontsLoaded){
+        return null
+    }
+    
     return (
         <>        
             <Header navigation={navigation} />
             <View style={styles.container}>
-                <Text style={{ fontSize: 25, textAlign: 'center' }}>Checkout</Text>
+                <Text style={{ fontSize: 25, textAlign: 'center', fontFamily: 'ArefRuqaa_400Regular' }}>Checkout</Text>
                 <ScrollView style={{ marginTop: 20 }}>
                     <View style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                         { favourites.map((f, idx) => {
@@ -38,9 +49,9 @@ export function CheckoutPage({ navigation, refresh, refreshFlag } ){
                                         }}
                                     />
                                     <View style={{ display: 'flex', gap: 5 }}>
-                                        <Text style={{ fontSize: 20 }}>{f.name}</Text>
-                                        <Text style={{ color: 'grey' }}>{f.description}</Text>
-                                        <Text style={{ color: 'orange', fontSize: 20 }}>${f.price}</Text>
+                                        <Text style={{ fontSize: 20, fontFamily: 'ArefRuqaa_400Regular' }}>{f.name}</Text>
+                                        <Text style={{ color: 'grey', fontFamily: 'ArefRuqaa_400Regular' }}>{f.description}</Text>
+                                        <Text style={{ color: 'orange', fontFamily: 'ArefRuqaa_400Regular', fontSize: 20 }}>${f.price}</Text>
                                         <View style={{ width: '100%', position: 'relative'}}>
                                             <XMarkIcon
                                                 color={'red'} 
@@ -69,5 +80,7 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         backgroundColor: 'white',
         marginBottom: 100,
+        height: '100%',
+        fontFamily: 'ArefRuqaa_400Regular'
     }
 })

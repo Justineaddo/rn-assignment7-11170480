@@ -45,9 +45,9 @@ export default function Product({ id, name, description, price, image, isListVie
                         }
                     </View>
                     <View style={{ display: 'flex', gap: 5}}>
-                        <Text style={{ fontSize: 20 }}>{name}</Text>
-                        <Text style={{ color: 'grey' }}>{description}</Text>
-                        <Text style={{ color: 'orange', fontSize: 20 }}>${price}</Text>
+                        <Text style={{ fontSize: 20, fontFamily: 'ArefRuqaa_400Regular' }}>{name}</Text>
+                        <Text style={{ color: 'grey', fontFamily: 'ArefRuqaa_400Regular' }}>{description}</Text>
+                        <Text style={{ color: 'orange', fontFamily: 'ArefRuqaa_400Regular', fontSize: 20 }}>${price}</Text>
                     </View>
                 </View>
             }
@@ -64,9 +64,9 @@ export default function Product({ id, name, description, price, image, isListVie
                         }}
                     />
                     <View style={{ display: 'flex', gap: 5 }}>
-                        <Text style={{ fontSize: 20 }}>{name}</Text>
-                        <Text style={{ color: 'grey' }}>{description}</Text>
-                        <Text style={{ color: 'orange', fontSize: 20 }}>${price}</Text>
+                        <Text style={{ fontSize: 20, fontFamily: 'ArefRuqaa_400Regular' }}>{name}</Text>
+                        <Text style={{ color: 'grey', fontFamily: 'ArefRuqaa_400Regular' }}>{description}</Text>
+                        <Text style={{ color: 'orange', fontFamily: 'ArefRuqaa_400Regular', fontSize: 20 }}>${price}</Text>
                         {
                             isFavourite ?
                             <ShoppingBagIcon

@@ -3,17 +3,26 @@ import Header from "../components/header.component";
 import { FunnelIcon, ListBulletIcon } from "react-native-heroicons/outline";
 import { useState } from "react";
 import Product from "../components/product.component";
+import { ArefRuqaa_400Regular, useFonts } from '@expo-google-fonts/aref-ruqaa'
+
 
 export function HomePage({ navigation,  refresh, refreshFlag }){
-
     const [ isListView, setIsListView ] = useState(false);
+
+
+    let [ fontsLoaded ] =  useFonts({ ArefRuqaa_400Regular});
+
+    if(!fontsLoaded){
+        return null
+    }
+
 
     return (
         <>
             <Header navigation={navigation} />
             <View style={styles.container}>
                 <View style={{ display: 'flex', flexDirection: 'row', marginBottom: 20, justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 600}}>OUR STORY</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 600, fontFamily: 'ArefRuqaa_400Regular'}}>OUR STORY</Text>
                     <View style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
                         <ListBulletIcon onPress={()=>{ setIsListView(prev => !prev)}} color={'black'} size={20} />
                         <FunnelIcon color={'black'} size={20} />
@@ -38,34 +47,35 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         backgroundColor: 'white',
         marginBottom: 100,
+        fontFamily: 'ArefRuqaa_400Regular'
     }
 })
 
 export const products = [
     {
         id: '0001',
-        name: 'Office Wear',
+        name: 'OFFICE WEAR',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress1.png')
     },
     {
         id: '0002',
-        name: 'Black',
+        name: 'BLACK',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress2.png')
     },
     {
         id: '0003',
-        name: 'Church Wear',
+        name: 'CHURCH WEAR',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress3.png')
     },
     {
         id: '0004',
-        name: 'Lamerei',
+        name: 'LAMEREI',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress4.png')
@@ -79,14 +89,14 @@ export const products = [
     },
     {
         id: '0006',
-        name: 'Lopo',
+        name: 'LOPO',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress6.png')
     },
     {
         id: '0007',
-        name: 'Lame',
+        name: 'LAME',
         description: 'Reversible angora cardigan',
         price: '120',
         image: require('../assets/dress7.png')

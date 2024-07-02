@@ -11,7 +11,10 @@ export default function App() {
   const [ refreshFlag, refresh ] = useState(false);
   return (
     <NavigationContainer>
-      <Drawer.Navigator screenOptions={{ headerShown: false}}>
+      <Drawer.Navigator screenOptions={{ 
+          headerShown: false,
+          drawerLabelStyle: { fontFamily: 'ArefRuqaa_400Regular'}
+        }}>
         <Drawer.Screen name='Home' >
         { props => <HomePage {...props} refresh={refresh} refreshFlag={refreshFlag} /> }
         </Drawer.Screen>
